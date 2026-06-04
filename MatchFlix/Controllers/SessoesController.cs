@@ -19,8 +19,10 @@ namespace MatchFlix.Controllers
         [HttpPost]
         public async Task<ActionResult<Sessao>> CriarSessao(Sessao novaSessao)
         {
-            novaSessao.DataCriacao = DateTime.Now;
-            novaSessao.Status = "Ativa";
+            // Ajustado para as propriedades reais da sua Model: DataInicio, DataFim e status (minúsculo)
+            novaSessao.DataInicio = DateTime.Now;
+            novaSessao.DataFim = DateTime.Now.AddDays(1); // Define um fim padrão de 24h para a sessão
+            novaSessao.status = "Ativa";
 
             _context.Sessoes.Add(novaSessao);
             await _context.SaveChangesAsync();
@@ -39,43 +41,51 @@ namespace MatchFlix.Controllers
         }
 
         // 3. VOTAR EM UM FILME (POST: api/sessoes/votar)
-        // Aqui o usuário diz se deu "Like" ou "Dislike"
         [HttpPost("votar")]
         public async Task<IActionResult> VotarNoFilme([FromBody] Avaliacao voto)
         {
-            voto.DataAvaliacao = DateTime.Now;
+            // Ajustado para DataHora (propriedade real da sua Model Avaliacao)
+            voto.DataHora = DateTime.Now;
             _context.Avaliacoes.Add(voto);
             await _context.SaveChangesAsync();
 
-            // REGRA DE MATCH: Vamos checar se o voto foi "Like" e se todos do grupo também deram "Like"
-            if (voto.Voto == "Like")
+            // REGRA DE MATCH: Se o usuário deu "Like" (true)
+            if (voto.like)
             {
-                // Descobre qual é o grupo dessa sessão
-                var sessao = await _context.Sessoes.FindAsync(voto.Id_Sessao);
-                if (sessao != null)
+                // Buscamos a linha da SessaoFilme para descobrir a qual Sessão e Filme esse voto pertence
+                var sessaoFilme = await _context.SessoesFilmes.FindAsync(voto.Id_Sessao_Filme);
+
+                if (sessaoFilme != null)
                 {
-                    // Conta quantos membros o grupo tem no total
-                    var totalMembrosGrupo = await _context.MembrosGrupos
-                        .CountAsync(m => m.Id_Grupo == sessao.Id_Grupo);
+                    // Buscamos a Sessão correspondente para achar o Id_Grupo
+                    var sessao = await _context.Sessoes.FindAsync(sessaoFilme.Id_Sessao);
 
-                    // Conta quantos "Likes" esse filme específico já recebeu nessa sessão
-                    var totalLikesFilme = await _context.Avaliacoes
-                        .CountAsync(a => a.Id_Sessao == voto.Id_Sessao && a.Id_Filme == voto.Id_Filme && a.Voto == "Like");
-
-                    // Se o número de likes for igual ao número de membros, temos um MATCH!
-                    if (totalLikesFilme == totalMembrosGrupo)
+                    if (sessao != null)
                     {
-                        var novoMatch = new Match
+                        // Conta quantos membros o grupo tem no total
+                        var totalMembrosGrupo = await _context.MembrosGrupos
+                            .CountAsync(m => m.Id_Grupo == sessao.Id_Grupo);
+
+                        // Conta quantos "Likes" (true) esse filme específico recebeu nesta mesma sessão
+                        var totalLikesFilme = await _context.Avaliacoes
+                            .CountAsync(a => a.Id_Sessao_Filme == voto.Id_Sessao_Filme && a.like == true);
+
+                        // Se o número de likes chegar ao total de membros do grupo, DEU MATCH!
+                        if (totalLikesFilme == totalMembrosGrupo)
                         {
-                            Id_Sessao = voto.Id_Sessao,
-                            Id_Filme = voto.Id_Filme,
-                            DataMatch = DateTime.Now
-                        };
+                            var novoMatch = new Match
+                            {
+                                Id_Sessao = sessaoFilme.Id_Sessao,
+                                Id_Filme = sessaoFilme.Id_Filme,
+                                Total_Likes = totalLikesFilme,
+                                DataMacth = DateTime.Now // Mantido o nome exato "DataMacth" da sua Model
+                            };
 
-                        _context.Matches.Add(novoMatch);
-                        await _context.SaveChangesAsync();
+                            _context.Matches.Add(novoMatch);
+                            await _context.SaveChangesAsync();
 
-                        return Ok(new { Mensagem = "DEU MATCH! Todo mundo quer assistir a esse filme!", Match = novoMatch });
+                            return Ok(new { Mensagem = "DEU MATCH! Todo mundo do grupo quer assistir a esse filme!", Match = novoMatch });
+                        }
                     }
                 }
             }
@@ -89,7 +99,7 @@ namespace MatchFlix.Controllers
         {
             var matches = await _context.Matches
                 .Where(m => m.Id_Sessao == idSessao)
-                .Include(m => m.Filme) // Traz junto os dados do Filme para ficar bonito na tela
+                .Include(m => m.Filme) // Carrega os dados do filme associado
                 .ToListAsync();
 
             return Ok(matches);
