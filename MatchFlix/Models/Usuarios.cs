@@ -18,6 +18,7 @@ namespace MatchFlix.Models
         [Required, MaxLength(100)]
         public string Senha { get; set; } = string.Empty;
 
-        public DateTime DataCadastro { get; set; } = DateTime.Now; // Define a propriedade DataCadastro com um valor padrão de data e hora atual
+        [Column("data_cadastro")] // <-- COLE AQUI, BEM EM CIMA DA DATA!
+        public DateTime DataCadastro { get; set; } = DateTime.Now; // Define a propriedade DataCadastro com um valor padrão...
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MatchFlix.DTOs
 {
-    public class Class
+    public class CadastroUsuarioDTO
     {
     }
 }
