@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #080c14; /* O fundo escuro do seu protótipo */
+  color: #ffffff; /* Texto em branco por padrão */
+  min-height: 100vh;
+}
+

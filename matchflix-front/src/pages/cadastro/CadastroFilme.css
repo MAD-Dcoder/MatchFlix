@@ -1,0 +1,64 @@
+/* CadastroFilme.css - Layout Premium */
+.cadastro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #121212; /* Fundo escuro padrão */
+}
+
+.form-cadastro {
+    width: 100%;
+    max-width: 500px;
+    background-color: #181818;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #333;
+}
+
+.form-cadastro h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.form-cadastro input {
+    width: 100%;
+    padding: 15px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho do input */
+    transition: border-color 0.3s ease;
+}
+
+.form-cadastro input:focus {
+    border-color: #e50914; /* Vermelho Netflix ao clicar */
+    outline: none;
+}
+
+.form-cadastro button {
+    width: 100%;
+    padding: 15px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.form-cadastro button:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+}

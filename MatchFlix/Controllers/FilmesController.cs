@@ -4,43 +4,34 @@ using MatchFlix.Models;
 
 namespace MatchFlix.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/[controller]")] // Define a rota para o controlador, neste caso, "api/filmes"
     public class FilmesController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public FilmesController(AppDbContext context) // Construtor para injetar o contexto do banco de dados
+        public FilmesController(AppDbContext context)
         {
             _context = context;
         }
 
+        // Método que você já tem (GET)
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Filme>>> ListarTodos() // Define que este método responde a requisições GET para "api/filmes"
+        public async Task<ActionResult<IEnumerable<Filme>>> ListarTodos()
         {
-            var filmes = await _context.Filmes.ToListAsync();
-            return Ok(filmes);
+            return await _context.Filmes.ToListAsync();
         }
 
-        [HttpGet("{id}")] // Define que este método responde a requisições GET para "api/filmes/{id}"
-        public async Task<ActionResult<Filme>> BuscarPorId(int id)
-        {
-            var filme = await _context.Filmes.FindAsync(id); // Busca o filme pelo ID
-
-            if (filme == null)
-                return NotFound("Filme não encontrado."); // Retorna 404 se o filme não for encontrado
-
-            return Ok(filme); // Retorna o filme encontrado
-
-        }
-
+        // --- COLE O CÓDIGO ABAIXO AQUI ---
         [HttpPost]
-        public async Task<ActionResult<Filme>> Cadastrar(Filme novoFilme)
+        public async Task<ActionResult<Filme>> PostFilme(Filme filme)
         {
-            _context.Filmes.Add(novoFilme); // Adiciona o novo filme ao contexto
-            await _context.SaveChangesAsync(); // Salva as mudanças no banco de dados
+            _context.Filmes.Add(filme);
+            await _context.SaveChangesAsync();
 
-            return Ok(novoFilme); // Retorna o filme cadastrado
+            // Retorna o filme criado (opcional)
+            return CreatedAtAction(nameof(ListarTodos), new { id = filme.Id_Filme }, filme);
         }
+        // ---------------------------------
     }
 }

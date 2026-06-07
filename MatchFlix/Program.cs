@@ -13,6 +13,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 1. Configurando a política de CORS para liberar o React
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("LiberarFrontEnd", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "http://localhost:3000") // Portas padrão do React/Vite
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("LiberarFrontEnd");
 
 app.UseAuthorization();
 
