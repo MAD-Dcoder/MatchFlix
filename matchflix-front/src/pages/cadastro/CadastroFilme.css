@@ -1,64 +1,92 @@
-/* CadastroFilme.css - Layout Premium */
+/* =========================================
+   CadastroFilme.css - Estilo MatchFlix Premium
+   ========================================= */
+
 .cadastro-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #121212; /* Fundo escuro padrão */
+  display: flex;
+  flex-direction: column; /* Garante que o título fique em cima do form */
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  
+  /* Fundo Quadriculado idêntico ao da Home */
+  background-color: #080B10;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+}
+
+.cadastro-container h2 {
+  color: #ffffff;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .form-cadastro {
-    width: 100%;
-    max-width: 500px;
-    background-color: #181818;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border: 1px solid #333;
-}
-
-.form-cadastro h2 {
-    color: #fff;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
+  width: 100%;
+  max-width: 450px;
+  background-color: #0B1017; /* Mesma cor do menu lateral da Home */
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #1A222E;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5); /* Sombra elegante */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form-cadastro input {
-    width: 100%;
-    padding: 15px;
-    background-color: #222;
-    border: 1px solid #444;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1rem;
-    box-sizing: border-box; /* Garante que o padding não aumente o tamanho do input */
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #121820; /* Fundo mais escuro para os inputs */
+  border: 1px solid #1A222E;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
+/* Efeito Neon Ciano ao clicar no input */
 .form-cadastro input:focus {
-    border-color: #e50914; /* Vermelho Netflix ao clicar */
-    outline: none;
+  outline: none;
+  border-color: #00E5FF;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
 }
 
+/* Ocultar as setinhas chatas do input type="number" */
+.form-cadastro input[type="number"]::-webkit-inner-spin-button, 
+.form-cadastro input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Botão no estilo Primário (Ciano Neon) */
 .form-cadastro button {
-    width: 100%;
-    padding: 15px;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  padding: 15px;
+  background-color: #00E5FF;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
 }
 
 .form-cadastro button:hover {
-    background-color: #f40612;
-    transform: translateY(-2px);
+  background-color: #00C4DD;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+  transform: translateY(-2px);
 }

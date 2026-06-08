@@ -1,107 +1,385 @@
-/* Home.css */
-.home-container {
-    padding: 20px;
-    background-color: #121212;
-    min-height: 100vh;
-    color: white;
-    font-family: sans-serif;
+/* Home.css (Versão Dashboard) */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #080B10; /* Fundo principal super escuro */
+  color: #ffffff;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #333;
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background-color: #0B1017;
+  border-right: 1px solid #1A222E;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
 }
 
-header h1 {
-    color: #e50914; /* Cor estilo Netflix */
-    margin: 0;
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.0rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  padding-left: 10px;
 }
 
-.lista-filmes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+.sidebar-logo span {
+  color: #00E5FF; /* Ciano Neon */
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: #8B9BB4;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.nav-item:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.nav-item.ativo {
+  background-color: rgba(0, 229, 255, 0.1);
+  color: #00E5FF;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* Footer Sidebar (Perfil) */
+.sidebar-footer {
+  border-top: 1px solid #1A222E;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: #00E5FF;
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.info-usuario {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-usuario .nome {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.info-usuario .email {
+  font-size: 0.75rem;
+  color: #8B9BB4;
+}
+
+.btn-sair {
+  background: transparent;
+  color: #8B9BB4;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  padding: 5px 0;
+}
+
+.btn-sair:hover {
+  color: #ff4757;
+}
+
+/* Área Central */
+.dashboard-main {
+  flex: 1;
+  padding: 40px 60px;
+  overflow-y: auto;
+}
+
+.conteudo-secao {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Área do Cabeçalho (Dashboard Header) ATUALIZADA */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 35px;
+}
+
+.dashboard-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+  color: #8B9BB4;
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.btn-primario {
+  background-color: #00E5FF;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.btn-primario:hover {
+  background-color: #00C4DD;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+/* Estados Vazios */
+.estado-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  color: #8B9BB4;
+}
+
+.icone-vazio {
+  background-color: #1A222E;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  color: #4A5B75;
+}
+
+.estado-vazio h3 {
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+/* Alertas e Sub-seções */
+.aviso-barra {
+  background-color: transparent;
+  border: 1px solid #1A222E;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: #8B9BB4;
+  margin-bottom: 40px;
+}
+
+.aviso-barra span {
+  color: #00E5FF;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sub-secao {
+  margin-bottom: 40px;
+}
+
+.sub-secao h4 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.texto-mutado {
+  color: #8B9BB4;
+  font-size: 0.9rem;
+}
+
+/* Animação suave ao trocar de aba */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* =========================================
+   Estilos da Grade de Filmes (Aba Filmes)
+   ========================================= */
+.grade-filmes {
+  display: grid;
+  /* Cria colunas responsivas: os cards terão no mínimo 180px e se ajustam ao tamanho da tela */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+  padding-bottom: 40px;
 }
 
 .card-filme {
-    background-color: #1f1f1f;
-    padding: 15px;
-    border-radius: 8px;
-    transition: transform 0.2s;
+  background-color: #0B1017;
+  border: 1px solid #1A222E;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
 }
 
 .card-filme:hover {
-    transform: scale(1.05);
+  transform: translateY(-5px);
+  border-color: #00E5FF;
+  box-shadow: 0 8px 20px rgba(0, 229, 255, 0.15);
 }
 
-.card-filme h3 {
-    margin: 0 0 10px 0;
-}
-
-button {
-    background-color: #e50914;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #f40612;
-}
-.lista-filmes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Aumentei um pouco a largura mínima */
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.card-filme {
-    background-color: #1f1f1f;
-    border-radius: 10px;
-    overflow: hidden; /* Isso é vital para a imagem não sair fora da borda arredondada */
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-filme:hover {
-    transform: scale(1.03);
-}
-
-.banner-filme {
-    width: 100%;
-    height: 320px; /* Altura fixa para todos os banners ficarem alinhados */
-    object-fit: cover; /* Corta a imagem mantendo a proporção, sem deformar */
+.capa-filme {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-bottom: 1px solid #1A222E;
 }
 
 .info-filme {
-    padding: 15px;
-    flex-grow: 1; /* Faz a área de info ocupar o espaço restante */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.sinopse {
-    font-size: 0.9rem;
-    color: #b3b3b3;
-    margin: 10px 0;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a sinopse a 3 linhas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.info-filme h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #ffffff;
+  /* Trunca o texto com "..." se o título do filme for gigante */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.detalhes {
-    font-size: 0.85rem;
-    color: #829167;
-    display: flex;
-    gap: 15px;
-    font-weight: bold;
+.info-filme p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #8B9BB4;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   MODAL (Pop-up)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background-color: #0B1017;
+  border: 1px solid #1A222E;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.modal-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.modal-content p {
+  color: #8B9BB4;
+  margin-bottom: 25px;
+  font-size: 0.9rem;
+}
+
+.form-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-modal input, .form-modal textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #121820;
+  border: 1px solid #1A222E;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-modal input:focus, .form-modal textarea:focus {
+  outline: none;
+  border-color: #00E5FF;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn-secundario {
+  background: transparent;
+  color: #8B9BB4;
+  border: 1px solid #1A222E;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secundario:hover {
+  background: #1A222E;
+  color: #fff;
+}

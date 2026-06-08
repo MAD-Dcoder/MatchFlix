@@ -6,10 +6,8 @@ function Cadastro() {
   const navigate = useNavigate();
 
   return (
-    <div className="cadastro-container">
-      
-      {/* LADO ESQUERDO: Banner Decorativo */}
-      <div className="cadastro-banner-section">
+    <div className="cadastro-container">  
+        <div className="cadastro-banner-section">
         <div className="banner-content">
           <span className="star-icon">✨</span>
           <h2>Faça parte do grupo.</h2>
