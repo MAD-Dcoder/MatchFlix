@@ -30,8 +30,9 @@ function Login() {
     <div className="login-container">
       {/* LADO ESQUERDO: Formulário */}
       <div className="login-form-section">
-        <div className="logo">
-          <span className="logo-icon">⚡</span> MatchFlix
+        <div className="sidebar-logo">
+          <span className="logo-icone">⚡</span>
+            <h1>Match<span>Flix</span></h1>
         </div>
 
         <div className="form-content">

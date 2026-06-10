@@ -1,137 +1,254 @@
-.cadastro-container {
+/* =========================================
+   Cadastro.css - Layout Split Screen (Premium)
+   ========================================= */
+
+.cadastro-page-container {
   display: flex;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
+  background-color: #080B10; /* Fundo principal escuro */
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
 }
 
-/* --- LADO ESQUERDO (Banner) --- */
-.cadastro-banner-section {
+/* =========================================
+   PAINEL ESQUERDO (Com Brilho Neon Suave)
+   ========================================= */
+.cadastro-left-panel {
   flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 40px;
   text-align: center;
-  background-color: #05080f;
-  border-right: 1px solid #1a202c;
+  position: relative; /* Mantém como relativo para posicionar o brilho atrás */
+  overflow: hidden; /* Garante que o brilho não vaze para fora da tela */
+  
+  /* Fundo Quadriculado Sutil */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.banner-content {
-  max-width: 400px;
+/* O Segredo do Neon: Camada de luz estourada ao fundo */
+.cadastro-left-panel::before {
+  content: '';
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Cria um degradê circular que morre suavemente nas bordas */
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0, 229, 255, 0) 70%);
+  filter: blur(30px); /* Esfumaça a luz para dar o efeito de néon difuso */
+  z-index: 1; /* Fica atrás do texto e na frente do fundo */
+  pointer-events: none;
 }
 
-.star-icon {
-  font-size: 48px;
+/* Garante que os textos e ícones fiquem por cima da luz de fundo */
+.cadastro-left-panel .icone-claquete,
+.cadastro-left-panel h2,
+.cadastro-left-panel p,
+.cadastro-left-panel .cadastro-beneficios {
+  position: relative;
+  z-index: 2;
+}
+
+.cadastro-left-panel .icone-claquete {
+  font-size: 3rem;
+  margin-bottom: 20px;
   display: block;
-  margin-bottom: 24px;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
 }
 
-.banner-content h2 {
-  font-size: 32px;
-  margin-bottom: 16px;
+.cadastro-left-panel h2 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
   line-height: 1.2;
+  margin: 0 0 15px 0;
+  max-width: 450px;
+  letter-spacing: -0.5px;
 }
 
-.banner-content p {
-  color: #8b949e;
-  font-size: 16px;
+.cadastro-left-panel p {
+  color: #8B9BB4;
+  font-size: 1rem;
+  max-width: 420px;
+  margin: 0 0 30px 0;
   line-height: 1.5;
 }
 
-/* --- LADO DIREITO (Formulário) --- */
-.cadastro-form-section {
-  width: 450px;
-  padding: 40px;
+/* Lista de benefícios marcados em ciano */
+.cadastro-beneficios {
   display: flex;
   flex-direction: column;
-  background-color: #080c14;
+  gap: 12px;
+  align-items: flex-start;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 40px;
+.beneficio-item {
+  color: #00E5FF; /* Ciano Neon */
+  font-size: 0.95rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.logo-icon {
-  color: #00e5ff;
-}
-
-.form-content {
-  flex: 1;
+/* =========================================
+   PAINEL DIREITO (Formulário Fixo)
+   ========================================= */
+.cadastro-right-panel {
+  width: 460px; /* Largura perfeita para não esmagar os campos */
+  background-color: #0B1017; /* Mesmo fundo escuro dos menus */
+  border-left: 1px solid #1A222E;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 60px 50px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Garante rolagem se a tela for muito baixa */
 }
 
-.form-content h2 {
-  font-size: 28px;
-  margin-bottom: 8px;
+/* Logo da MatchFlix no topo direito */
+.logo-matchflix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
-.subtitle {
-  color: #8b949e;
-  margin-bottom: 32px;
-  font-size: 14px;
+.logo-matchflix .logo-icone {
+  color: #00E5FF;
+  font-size: 1.2rem;
+}
+
+.logo-matchflix h1 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.logo-matchflix h1 span {
+  color: #00E5FF;
+}
+
+/* Cabeçalho do formulário */
+.form-header-text {
+  margin-bottom: 30px;
+}
+
+.form-header-text h3 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.form-header-text p {
+  color: #8B9BB4;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Campos de Entrada */
+.form-cadastro-usuario {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   margin-bottom: 20px;
 }
 
-.input-group label {
-  font-size: 13px;
+.form-cadastro-usuario label {
+  color: #ffffff;
+  font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #c9d1d9;
 }
 
-.input-group input {
-  background-color: #0d1117;
-  border: 1px solid #30363d;
-  padding: 12px;
-  border-radius: 6px;
-  color: #fff;
+.form-cadastro-usuario input {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #121820; /* Input levemente mais escuro */
+  border: 1px solid #1A222E;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-cadastro-usuario input:focus {
   outline: none;
-  font-size: 14px;
+  border-color: #00E5FF;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
 }
 
-.input-group input:focus {
-  border-color: #00e5ff;
-}
-
-.btn-cadastrar {
+/* Botão de Ação Primária */
+.form-cadastro-usuario button {
   width: 100%;
   padding: 14px;
-  background-color: #00e5ff;
-  color: #000;
+  background-color: #00E5FF;
+  color: #000000;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 8px;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  transition: all 0.3s ease;
   margin-top: 10px;
-  transition: opacity 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
 }
 
-.btn-cadastrar:hover {
-  opacity: 0.8;
+.form-cadastro-usuario button:hover {
+  background-color: #00C4DD;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+  transform: translateY(-1px);
 }
 
-.login-link {
+/* Link Inferior para Login */
+.link-login {
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #8B9BB4;
   text-align: center;
-  margin-top: 24px;
-  color: #8b949e;
-  font-size: 13px;
 }
 
-.login-link span {
-  color: #00e5ff;
-  cursor: pointer;
+.link-login a {
+  color: #00E5FF;
+  text-decoration: none;
   font-weight: bold;
+  margin-left: 4px;
+}
+
+.link-login a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade Básica para telas muito pequenas */
+@media (max-width: 768px) {
+  .cadastro-left-panel {
+    display: none; /* Esconde a esquerda em telas mobile */
+  }
+  .cadastro-right-panel {
+    width: 100%;
+    border-left: none;
+  }
 }
