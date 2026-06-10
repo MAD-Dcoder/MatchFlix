@@ -33,7 +33,7 @@ function Home() {
     e.preventDefault();
     try {
       // Exemplo de chamada para sua API (descomente e ajuste quando o backend estiver pronto)
-      // await api.post('/Grupos', novoGrupo); 
+      await api.post('/Grupos', { nome_Grupo: novoGrupo.nome, descricao: novoGrupo.descricao, codigoConvite: Math.random().toString(36).substring(2, 8).toUpperCase(), id_Usuario_Criador: 1 });
       
       alert(`Grupo "${novoGrupo.nome}" criado com sucesso!`);
       setModalGrupoAberto(false); // Fecha o modal
@@ -132,15 +132,15 @@ function Home() {
             ) : (
               <div className="grade-filmes">
                 {filmes.map((filme) => (
-                  <div key={filme.id} className="card-filme">
+                  <div key={filme.Id_Filme} className="card-filme">
                     <img 
-                      src={filme.poster_url || "https://via.placeholder.com/300x450?text=Sem+Capa"} 
-                      alt={`Capa do filme ${filme.titulo}`} 
+                      src={filme.Poster_url || "https://via.placeholder.com/300x450?text=Sem+Capa"} 
+                      alt={`Capa do filme ${filme.Titulo}`} 
                       className="capa-filme"
                     />
                     <div className="info-filme">
-                      <h4>{filme.titulo}</h4>
-                      <p>{filme.anoLancamento} • {filme.duracao} min</p>
+                      <h4>{filme.Titulo}</h4>
+                      <p>{filme.AnoLancamento} • {filme.Duracao} min</p>
                     </div>
                   </div>
                 ))}

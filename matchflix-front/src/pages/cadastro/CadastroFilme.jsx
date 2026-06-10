@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '/src/pages/services/api.js'; 
+import api from '../services/api.js'; 
 import './CadastroFilme.css';
 
 function CadastroFilme() {

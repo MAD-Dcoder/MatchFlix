@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../services/api.js';
 import './Cadastro.css'; 
 
 function Cadastro() {
+  const navigate = useNavigate();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState(''); // Estado para o campo extra da foto
+  const [confirmarSenha, setConfirmarSenha] = useState('');
 
-  const handleCadastro = (e) => {
+  const handleCadastro = async (e) => {
     e.preventDefault();
     if (senha !== confirmarSenha) {
       alert("As senhas não coincidem!");
       return;
     }
-    // Sua lógica de enviar para a API C# depois!
-    console.log({ nome, email, senha });
+    try {
+      await api.post('/Usuarios/cadastrar', { nome, email, senha });
+      alert('Cadastro realizado com sucesso! Faça login para continuar.');
+      navigate('/login');
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      const mensagem = error.response?.data || 'Erro ao realizar cadastro. Tente novamente.';
+      alert(mensagem);
+    }
   };
+
 
   return (
     <div className="cadastro-page-container">
